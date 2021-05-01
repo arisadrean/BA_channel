@@ -1,0 +1,24 @@
+nama: Windows-CRD
+ 
+di: 
+  workflow_dispatch:
+    masukan:
+      Kode kepemilikan:
+        deskripsi: 'Masukkan kode CRD'
+        wajib: benar
+      Kode PIN:
+        deskripsi: 'Enam digit Pin'
+        wajib: benar
+ 
+pekerjaan:
+  membangun:
+    run-on: windows-terbaru
+ 
+    Langkah:
+    - penggunaan: tindakan / checkout @ v2
+    - name: Memulai Setup
+      jalankan: ./setup.ps1
+    - nama: Memulai CRD
+      jalankan: $ {{github.event.inputs.authcode}} -pin = $ {{github.event.inputs.pincode}}
+    - nama: Keep Alive
+      jalankan: ./timeout.ps1
